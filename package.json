@@ -2,7 +2,7 @@
   "name": "artifact-viewer",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://vlietland-college.github.io/wiskundedag-puntenrace",
+  "homepage": "https://vlietland-college.github.io/wiskundedag-puntenrace/",
   "type": "module",
   "scripts": {
     "dev": "vite",
