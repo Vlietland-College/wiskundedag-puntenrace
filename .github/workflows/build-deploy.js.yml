@@ -45,6 +45,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: production-files
+          run-id: ${{ github.event.workflow_run.id }}
           path: ./build
 
       - name: Deploying to gh-pages
