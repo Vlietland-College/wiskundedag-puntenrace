@@ -108,19 +108,30 @@ const BewegingsSpel = () => {
     ctx.stroke();
   };
 
+
   const tekenHindernissen = (ctx) => {
     ctx.strokeStyle = '#FF4444';
     ctx.lineWidth = 3 / zoom;
 
     hindernissen.forEach(hindernis => {
-      ctx.beginPath();
-      ctx.moveTo(hindernis[0].x * gridGrootte, -hindernis[0].y * gridGrootte);
-      for (let i = 1; i < hindernis.length; i++) {
-        ctx.lineTo(hindernis[i].x * gridGrootte, -hindernis[i].y * gridGrootte);
+      if (hindernis.length === 1) {
+        // Teken een punt voor hindernissen met één coördinaat
+        ctx.beginPath();
+        ctx.arc(hindernis[0].x * gridGrootte, -hindernis[0].y * gridGrootte, 5 / zoom, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+      } else {
+        // Teken een lijn voor hindernissen met meerdere coördinaten
+        ctx.beginPath();
+        ctx.moveTo(hindernis[0].x * gridGrootte, -hindernis[0].y * gridGrootte);
+        for (let i = 1; i < hindernis.length; i++) {
+          ctx.lineTo(hindernis[i].x * gridGrootte, -hindernis[i].y * gridGrootte);
+        }
+        ctx.stroke();
       }
-      ctx.stroke();
     });
   };
+
 
   const tekenBotsing = (ctx) => {
     ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
