@@ -258,19 +258,21 @@ const BewegingsSpel = () => {
     setRouteInput('');
   };
 
+
   const voegHindernissenToe = () => {
     try {
       const coordinaten = hindernisInput.split(' ')
-          .map(coord => {
-            const [x, y] = coord.split(',').map(Number);
-            return { x, y };
-          });
-
-      if (coordinaten.length < 2) throw new Error('Te weinig coördinaten');
+        .map(coord => {
+          const [x, y] = coord.split(',').map(Number);
+          if (isNaN(x) || isNaN(y)) throw new Error('Ongeldige coördinaten');
+          return { x, y };
+        });
+      
+      if (coordinaten.length < 1) throw new Error('Geen coördinaten ingevoerd');
       setHindernissen([...hindernissen, coordinaten]);
       setHindernisInput('');
     } catch (e) {
-      alert('Ongeldige invoer. Gebruik het formaat: x1,y1 x2,y2 x3,y3');
+      alert('Ongeldige invoer. Gebruik het formaat: x1,y1 [x2,y2 x3,y3 ...]');
     }
   };
 
