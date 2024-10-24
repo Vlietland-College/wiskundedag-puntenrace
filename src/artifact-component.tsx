@@ -307,7 +307,7 @@ const tekenRaster = (ctx, breedte, hoogte) => {
     }
   };
 
-  return (
+return (
     <div className="flex gap-4 p-4">
       <div>
         <canvas ref={canvasRef} width={basisBreedte} height={basisHoogte} className="border border-gray-300" />
@@ -359,5 +359,6 @@ const tekenRaster = (ctx, breedte, hoogte) => {
       </div>
     </div>
 );
+
 
 export default BewegingsSpel;
