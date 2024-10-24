@@ -57,34 +57,43 @@ const BewegingsSpel = () => {
 
     ctx.restore();
   };
+  
+const tekenRaster = (ctx, breedte, hoogte) => {
+  ctx.strokeStyle = '#ddd';
+  ctx.lineWidth = 1 / zoom;
 
-  const tekenRaster = (ctx, breedte, hoogte) => {
-    ctx.strokeStyle = '#ddd';
-    ctx.lineWidth = 1 / zoom;
+  // Bereken startpunt dat deelbaar is door gridGrootte
+  let startX = Math.floor(-breedte / 2 / gridGrootte) * gridGrootte;
+  let startY = Math.floor(-hoogte / 2 / gridGrootte) * gridGrootte;
+  let eindX = Math.ceil(breedte / 2 / gridGrootte) * gridGrootte;
+  let eindY = Math.ceil(hoogte / 2 / gridGrootte) * gridGrootte;
 
-    for (let x = -Math.ceil(breedte / 2); x <= Math.ceil(breedte / 2); x += gridGrootte) {
-      ctx.beginPath();
-      ctx.moveTo(x, -hoogte / 2);
-      ctx.lineTo(x, hoogte / 2);
-      ctx.stroke();
-    }
-
-    for (let y = -Math.ceil(hoogte / 2); y <= Math.ceil(hoogte / 2); y += gridGrootte) {
-      ctx.beginPath();
-      ctx.moveTo(-breedte / 2, y);
-      ctx.lineTo(breedte / 2, y);
-      ctx.stroke();
-    }
-
-    ctx.strokeStyle = '#000';
-    ctx.lineWidth = 2 / zoom;
+  // Verticale lijnen
+  for (let x = startX; x <= eindX; x += gridGrootte) {
     ctx.beginPath();
-    ctx.moveTo(-breedte / 2, 0);
-    ctx.lineTo(breedte / 2, 0);
-    ctx.moveTo(0, -hoogte / 2);
-    ctx.lineTo(0, hoogte / 2);
+    ctx.moveTo(x, -hoogte / 2);
+    ctx.lineTo(x, hoogte / 2);
     ctx.stroke();
-  };
+  }
+
+  // Horizontale lijnen
+  for (let y = startY; y <= eindY; y += gridGrootte) {
+    ctx.beginPath();
+    ctx.moveTo(-breedte / 2, y);
+    ctx.lineTo(breedte / 2, y);
+    ctx.stroke();
+  }
+
+  // Zwarte assen (deze blijven hetzelfde)
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 2 / zoom;
+  ctx.beginPath();
+  ctx.moveTo(-breedte / 2, 0);
+  ctx.lineTo(breedte / 2, 0);
+  ctx.moveTo(0, -hoogte / 2);
+  ctx.lineTo(0, hoogte / 2);
+  ctx.stroke();
+};
 
   const tekenStip = (ctx) => {
     ctx.fillStyle = 'red';
