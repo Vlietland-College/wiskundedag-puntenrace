@@ -149,21 +149,43 @@ const tekenRaster = (ctx, breedte, hoogte) => {
     ctx.fill();
   };
 
+
   const controleerBotsing = (vanPos, naarPos) => {
-    for (const hindernis of hindernissen) {
+  for (const hindernis of hindernissen) {
+    if (hindernis.length === 1) {
+      // Voor een punt-hindernis controleren we of het punt precies op de lijn ligt
+      const punt = hindernis[0];
+      
+      // Check of punt op het lijnsegment ligt door te controleren:
+      // 1. Of de afstand vanPos->punt + punt->naarPos gelijk is aan vanPos->naarPos
+      // 2. Of het punt binnen de uitersten van het lijnsegment valt
+      const d1 = Math.sqrt((punt.x - vanPos.x)**2 + (punt.y - vanPos.y)**2);
+      const d2 = Math.sqrt((naarPos.x - punt.x)**2 + (naarPos.y - punt.y)**2);
+      const d3 = Math.sqrt((naarPos.x - vanPos.x)**2 + (naarPos.y - vanPos.y)**2);
+      
+      const puntLigtOpLijn = Math.abs(d1 + d2 - d3) < 0.0001; // kleine marge voor afrondingsfouten
+      const xInBereik = punt.x >= Math.min(vanPos.x, naarPos.x) && punt.x <= Math.max(vanPos.x, naarPos.x);
+      const yInBereik = punt.y >= Math.min(vanPos.y, naarPos.y) && punt.y <= Math.max(vanPos.y, naarPos.y);
+      
+      if (puntLigtOpLijn && xInBereik && yInBereik) {
+        return true;
+      }
+    } else {
+      // Bestaande lijnstuk-botsingsdetectie
       for (let i = 0; i < hindernis.length - 1; i++) {
         const p1 = hindernis[i];
         const p2 = hindernis[i + 1];
         if (lijnSegmentenKruisen(
-            vanPos.x, vanPos.y, naarPos.x, naarPos.y,
-            p1.x, p1.y, p2.x, p2.y
+          vanPos.x, vanPos.y, naarPos.x, naarPos.y,
+          p1.x, p1.y, p2.x, p2.y
         )) {
           return true;
         }
       }
     }
-    return false;
-  };
+  }
+  return false;
+};
 
   const lijnSegmentenKruisen = (x1, y1, x2, y2, x3, y3, x4, y4) => {
     const noemer = (x4 - x3) * (y1 - y2) - (x1 - x2) * (y4 - y3);
