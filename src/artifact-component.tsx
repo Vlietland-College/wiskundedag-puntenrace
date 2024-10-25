@@ -245,7 +245,6 @@ const tekenRaster = (ctx, breedte, hoogte) => {
     setMoveHistory(moveHistory.slice(0, -1));
     setBotsing(null);
   };
-
 const voerRouteUit = () => {
   const stappen = routeInput.toUpperCase().split('');
   let huidigeSnelheid = { ...speed };
@@ -254,21 +253,26 @@ const voerRouteUit = () => {
   let nieuweGeschiedenis = [...moveHistory];
 
   for (const stap of stappen) {
-    // Eerst controleren we of het een P is
-    if (stap === 'P') {
-      nieuweGeschiedenis.push(
-        `P (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
-      );
-      continue;
-    }
-
-    // Dan de andere bewegingen
     switch (stap) {
-      case 'N': huidigeSnelheid.y++; break;
-      case 'Z': huidigeSnelheid.y--; break;
-      case 'O': huidigeSnelheid.x++; break;
-      case 'W': huidigeSnelheid.x--; break;
-      default: continue;
+      case 'N': 
+        huidigeSnelheid.y++; 
+        break;
+      case 'Z': 
+        huidigeSnelheid.y--; 
+        break;
+      case 'O': 
+        huidigeSnelheid.x++; 
+        break;
+      case 'W': 
+        huidigeSnelheid.x--; 
+        break;
+      case 'P': 
+        nieuweGeschiedenis.push(
+          `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
+        );
+        continue;
+      default: 
+        continue;
     }
 
     const nieuwePositie = {
@@ -284,7 +288,7 @@ const voerRouteUit = () => {
     huidigePositie = nieuwePositie;
     nieuweRoute.push(nieuwePositie);
     nieuweGeschiedenis.push(
-      `${stap} (${nieuwePositie.x},${nieuwePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
+      `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
     );
   }
 
