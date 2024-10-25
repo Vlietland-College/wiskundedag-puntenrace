@@ -245,7 +245,8 @@ const tekenRaster = (ctx, breedte, hoogte) => {
     setMoveHistory(moveHistory.slice(0, -1));
     setBotsing(null);
   };
-const voerRouteUit = () => {
+
+  const voerRouteUit = () => {
   const stappen = routeInput.toUpperCase().split('');
   let huidigeSnelheid = { ...speed };
   let huidigePositie = { ...position };
@@ -253,20 +254,40 @@ const voerRouteUit = () => {
   let nieuweGeschiedenis = [...moveHistory];
 
   for (const stap of stappen) {
+    let nieuwePositie = { ...huidigePositie };
+    
+    // Update snelheid en positie voor bewegingszetten
     switch (stap) {
       case 'N': 
         huidigeSnelheid.y++; 
+        nieuwePositie = {
+          x: huidigePositie.x + huidigeSnelheid.x,
+          y: huidigePositie.y + huidigeSnelheid.y
+        };
         break;
       case 'Z': 
         huidigeSnelheid.y--; 
+        nieuwePositie = {
+          x: huidigePositie.x + huidigeSnelheid.x,
+          y: huidigePositie.y + huidigeSnelheid.y
+        };
         break;
       case 'O': 
         huidigeSnelheid.x++; 
+        nieuwePositie = {
+          x: huidigePositie.x + huidigeSnelheid.x,
+          y: huidigePositie.y + huidigeSnelheid.y
+        };
         break;
       case 'W': 
         huidigeSnelheid.x--; 
+        nieuwePositie = {
+          x: huidigePositie.x + huidigeSnelheid.x,
+          y: huidigePositie.y + huidigeSnelheid.y
+        };
         break;
       case 'P': 
+        // Voor P gebruiken we de huidige positie
         nieuweGeschiedenis.push(
           `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
         );
@@ -275,16 +296,13 @@ const voerRouteUit = () => {
         continue;
     }
 
-    const nieuwePositie = {
-      x: huidigePositie.x + huidigeSnelheid.x,
-      y: huidigePositie.y + huidigeSnelheid.y
-    };
-
+    // Controleer botsing voor bewegingszetten
     if (controleerBotsing(huidigePositie, nieuwePositie)) {
       setBotsing(nieuwePositie);
       break;
     }
 
+    // Update positie en geschiedenis voor bewegingszetten
     huidigePositie = nieuwePositie;
     nieuweRoute.push(nieuwePositie);
     nieuweGeschiedenis.push(
