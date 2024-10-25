@@ -279,7 +279,7 @@ const tekenRaster = (ctx, breedte, hoogte) => {
         //nieuweGeschiedenis.push(
         //  `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
         //);
-        continue;
+        break;
       default: 
         return;
         //continue;
