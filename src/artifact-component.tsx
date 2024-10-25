@@ -246,48 +246,50 @@ const tekenRaster = (ctx, breedte, hoogte) => {
     setBotsing(null);
   };
 
-  const voerRouteUit = () => {
-    const stappen = routeInput.toUpperCase().split('');
-    let huidigeSnelheid = { ...speed };
-    let huidigePositie = { ...position };
-    let nieuweRoute = [...route];
-    let nieuweGeschiedenis = [...moveHistory];
+const voerRouteUit = () => {
+  const stappen = routeInput.toUpperCase().split('');
+  let huidigeSnelheid = { ...speed };
+  let huidigePositie = { ...position };
+  let nieuweRoute = [...route];
+  let nieuweGeschiedenis = [...moveHistory];
 
-    for (const stap of stappen) {
-      switch (stap) {
-        case 'N': huidigeSnelheid.y++; break;
-        case 'Z': huidigeSnelheid.y--; break;
-        case 'O': huidigeSnelheid.x++; break;
-        case 'W': huidigeSnelheid.x--; break;
-        case 'P': break;
-        default: continue;
-      }
-
-      const nieuwePositie = {
-        x: huidigePositie.x + huidigeSnelheid.x,
-        y: huidigePositie.y + huidigeSnelheid.y
-      };
-
-      if (controleerBotsing(huidigePositie, nieuwePositie)) {
-        setBotsing(nieuwePositie);
-        break;
-      }
-
-      huidigePositie = nieuwePositie;
-      nieuweRoute.push(nieuwePositie);
-      if (stap !== 'P') {
+  for (const stap of stappen) {
+    switch (stap) {
+      case 'N': huidigeSnelheid.y++; break;
+      case 'Z': huidigeSnelheid.y--; break;
+      case 'O': huidigeSnelheid.x++; break;
+      case 'W': huidigeSnelheid.x--; break;
+      case 'P': 
         nieuweGeschiedenis.push(
-            `${stap} (${nieuwePositie.x},${nieuwePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
+          `P (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
         );
-      }
+        continue;
+      default: continue;
     }
 
-    setSpeed(huidigeSnelheid);
-    setPosition(huidigePositie);
-    setRoute(nieuweRoute);
-    setMoveHistory(nieuweGeschiedenis);
-    setRouteInput('');
-  };
+    const nieuwePositie = {
+      x: huidigePositie.x + huidigeSnelheid.x,
+      y: huidigePositie.y + huidigeSnelheid.y
+    };
+
+    if (controleerBotsing(huidigePositie, nieuwePositie)) {
+      setBotsing(nieuwePositie);
+      break;
+    }
+
+    huidigePositie = nieuwePositie;
+    nieuweRoute.push(nieuwePositie);
+    nieuweGeschiedenis.push(
+      `${stap} (${nieuwePositie.x},${nieuwePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
+    );
+  }
+
+  setSpeed(huidigeSnelheid);
+  setPosition(huidigePositie);
+  setRoute(nieuweRoute);
+  setMoveHistory(nieuweGeschiedenis);
+  setRouteInput('');
+};
 
 
   const voegHindernissenToe = () => {
