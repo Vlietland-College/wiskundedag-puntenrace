@@ -279,8 +279,10 @@ const tekenRaster = (ctx, breedte, hoogte) => {
         //nieuweGeschiedenis.push(
         //  `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
         //);
+        console.log("P")
         break;
       default: 
+        console.log("ander teken")
         return;
         //continue;
     }
