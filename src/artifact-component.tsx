@@ -208,6 +208,7 @@ const tekenRaster = (ctx, breedte, hoogte) => {
       case 'Z': nieuweSnelheid.y--; break;
       case 'O': nieuweSnelheid.x++; break;
       case 'W': nieuweSnelheid.x--; break;
+      case 'P': break;
       default: break;
     }
     setSpeed(nieuweSnelheid);
@@ -337,7 +338,7 @@ return (
             <Button onClick={() => beweeg('N')}><ArrowUp /></Button>
             <div></div>
             <Button onClick={() => beweeg('W')}><ArrowLeft /></Button>
-            <Button onClick={() => updatePositie(speed)}><Play /></Button>
+            <Button onClick={() => beweeg('P')}><Play /></Button>
             <Button onClick={() => beweeg('O')}><ArrowRight /></Button>
             <div></div>
             <Button onClick={() => beweeg('Z')}><ArrowDown /></Button>
