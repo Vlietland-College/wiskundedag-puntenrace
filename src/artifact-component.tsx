@@ -311,10 +311,17 @@ return (
     <div className="flex gap-4 p-4">
       <div>
         <canvas ref={canvasRef} width={basisBreedte} height={basisHoogte} className="border border-gray-300" />
-
-        <div className="mt-4 grid grid-cols-3 gap-2">
-          {/* ... bewegingsknoppen blijven hetzelfde ... */}
-        </div>
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            <div></div>
+            <Button onClick={() => beweeg('N')}><ArrowUp /></Button>
+            <div></div>
+            <Button onClick={() => beweeg('W')}><ArrowLeft /></Button>
+            <Button onClick={() => updatePositie(speed)}><Play /></Button>
+            <Button onClick={() => beweeg('O')}><ArrowRight /></Button>
+            <div></div>
+            <Button onClick={() => beweeg('Z')}><ArrowDown /></Button>
+            <Button onClick={maakLastStapOngedaan}><Undo /></Button>
+          </div>
       </div>
 
       <div className="w-96">
