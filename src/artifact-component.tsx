@@ -254,16 +254,20 @@ const voerRouteUit = () => {
   let nieuweGeschiedenis = [...moveHistory];
 
   for (const stap of stappen) {
+    // Eerst controleren we of het een P is
+    if (stap === 'P') {
+      nieuweGeschiedenis.push(
+        `P (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
+      );
+      continue;
+    }
+
+    // Dan de andere bewegingen
     switch (stap) {
       case 'N': huidigeSnelheid.y++; break;
       case 'Z': huidigeSnelheid.y--; break;
       case 'O': huidigeSnelheid.x++; break;
       case 'W': huidigeSnelheid.x--; break;
-      case 'P': 
-        nieuweGeschiedenis.push(
-          `P (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
-        );
-        continue;
       default: continue;
     }
 
@@ -290,7 +294,6 @@ const voerRouteUit = () => {
   setMoveHistory(nieuweGeschiedenis);
   setRouteInput('');
 };
-
 
   const voegHindernissenToe = () => {
     try {
