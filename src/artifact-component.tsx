@@ -359,6 +359,6 @@ return (
       </div>
     </div>
 );
-
+};
 
 export default BewegingsSpel;
