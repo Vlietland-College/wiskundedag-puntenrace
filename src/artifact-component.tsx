@@ -260,42 +260,34 @@ const tekenRaster = (ctx, breedte, hoogte) => {
     switch (stap) {
       case 'N': 
         huidigeSnelheid.y++; 
-        nieuwePositie = {
-          x: huidigePositie.x + huidigeSnelheid.x,
-          y: huidigePositie.y + huidigeSnelheid.y
-        };
+       
         break;
       case 'Z': 
         huidigeSnelheid.y--; 
-        nieuwePositie = {
-          x: huidigePositie.x + huidigeSnelheid.x,
-          y: huidigePositie.y + huidigeSnelheid.y
-        };
+
         break;
       case 'O': 
         huidigeSnelheid.x++; 
-        nieuwePositie = {
-          x: huidigePositie.x + huidigeSnelheid.x,
-          y: huidigePositie.y + huidigeSnelheid.y
-        };
+
         break;
       case 'W': 
         huidigeSnelheid.x--; 
-        nieuwePositie = {
-          x: huidigePositie.x + huidigeSnelheid.x,
-          y: huidigePositie.y + huidigeSnelheid.y
-        };
+
         break;
       case 'P': 
         // Voor P gebruiken we de huidige positie
-        nieuweGeschiedenis.push(
-          `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
-        );
+        //nieuweGeschiedenis.push(
+        //  `${stap} (${huidigePositie.x},${huidigePositie.y}) snelheid ${getSnelheidVector(huidigeSnelheid)}`
+        //);
         continue;
       default: 
-        continue;
+        return;
+        //continue;
     }
-
+     nieuwePositie = {
+          x: huidigePositie.x + huidigeSnelheid.x,
+          y: huidigePositie.y + huidigeSnelheid.y
+      };
     // Controleer botsing voor bewegingszetten
     if (controleerBotsing(huidigePositie, nieuwePositie)) {
       setBotsing(nieuwePositie);
