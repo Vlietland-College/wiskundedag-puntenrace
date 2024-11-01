@@ -334,21 +334,21 @@ return (
       <div>
         <canvas ref={canvasRef} width={basisBreedte} height={basisHoogte} className="border border-gray-300" />
 
-            <div className="mt-4 flex flex-col items-center gap-2">
-      <div>
-        <Button onClick={() => beweeg('N')} className="w-12"><ArrowUp /></Button>
-      </div>
-      <div className="flex gap-2">
-        <Button onClick={() => beweeg('W')} className="w-12"><ArrowLeft /></Button>
-        <Button onClick={() => updatePositie(speed)} className="w-12"><Play /></Button>
-        <Button onClick={() => beweeg('O')} className="w-12"><ArrowRight /></Button>
-      </div>
-      <div className="flex gap-2">
-        <Button onClick={() => beweeg('Z')} className="w-12"><ArrowDown /></Button>
-        <div className="w-12"></div>
-        <Button onClick={maakLastStapOngedaan} className="w-12"><Undo /></Button>
-      </div>
-    </div>
+          <div className="mt-4 flex flex-col items-center gap-2">
+            <div>
+              <Button onClick={() => beweeg('N')} className="w-12"><ArrowUp /></Button>
+            </div>
+            <div className="flex gap-2">
+              <Button onClick={() => beweeg('W')} className="w-12"><ArrowLeft /></Button>
+              <Button onClick={() => updatePositie(speed)} className="w-12"><Play /></Button>
+              <Button onClick={() => beweeg('O')} className="w-12"><ArrowRight /></Button>
+            </div>
+            <div className="flex gap-2">
+              <div className="w-12"></div> 
+              <Button onClick={() => beweeg('Z')} className="w-12"><ArrowDown /></Button>
+              <Button onClick={maakLastStapOngedaan} className="w-12"><Undo /></Button>
+            </div>
+          </div>
 
         
       </div>
