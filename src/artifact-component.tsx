@@ -333,16 +333,16 @@ return (
     <div className="flex gap-4 p-4">
       <div>
         <canvas ref={canvasRef} width={basisBreedte} height={basisHoogte} className="border border-gray-300" />
-          <div className="mt-4 grid grid-cols-3 gap-2">
+         <div className="mt-4 grid grid-cols-3 gap-2">
             <div></div>
-            <Button onClick={() => beweeg('N')}><ArrowUp /></Button>
+            <Button onClick={() => beweeg('N')} className="w-12"><ArrowUp /></Button>
             <div></div>
-            <Button onClick={() => beweeg('W')}><ArrowLeft /></Button>
-            <Button onClick={() => beweeg('P')}><Play /></Button>
-            <Button onClick={() => beweeg('O')}><ArrowRight /></Button>
+            <Button onClick={() => beweeg('W')} className="w-12"><ArrowLeft /></Button>
+            <Button onClick={() => updatePositie(speed)} className="w-12"><Play /></Button>
+            <Button onClick={() => beweeg('O')} className="w-12"><ArrowRight /></Button>
             <div></div>
-            <Button onClick={() => beweeg('Z')}><ArrowDown /></Button>
-            <Button onClick={maakLastStapOngedaan}><Undo /></Button>
+            <Button onClick={() => beweeg('Z')} className="w-12"><ArrowDown /></Button>
+            <Button onClick={maakLastStapOngedaan} className="w-12"><Undo /></Button>
           </div>
       </div>
 
